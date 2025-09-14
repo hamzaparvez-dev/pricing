@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenuineStack AI Receptionist - Pricing for Real Estate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+        .pricing-card.premium {
+            border: 3px solid #f39c12;
+            transform: scale(1.05);
+        }
+        .pricing-card.premium::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #f39c12;
+            color: white;
+            padding: 8px 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .starter .plan-name { color: #27ae60; }
+        .premium .plan-name { color: #f39c12; }
+        .enterprise .plan-name { color: #8e44ad; }
+        .pricing {
+            margin-bottom: 30px;
+        }
+        .setup-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .monthly-price {
+            font-size: 1.5rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+            position: relative;
+            padding-left: 30px;
+        }
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .features li strong {
+            color: #2c3e50;
+        }
+        .cta-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .starter .cta-button {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+        }
+        .premium .cta-button {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+        }
+        .enterprise .cta-button {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .implementation-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .implementation-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .phase {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid;
+            transition: transform 0.3s ease;
+        }
+        .phase:hover {
+            transform: translateY(-5px);
+        }
+        .phase:nth-child(1) { border-left-color: #3498db; }
+        .phase:nth-child(2) { border-left-color: #f39c12; }
+        .phase:nth-child(3) { border-left-color: #27ae60; }
+        .phase-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+        .phase h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .phase-payment {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+        .contact-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .payment-section {
+            margin-top: 40px;
+        }
+        .payment-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .payment-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .payment-logos img {
+            height: 40px;
+            filter: grayscale(100%) brightness(1000%);
+        }
+        .razorpay-link a {
+            display: inline-block;
+            background: #3395ff;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .razorpay-link a:hover {
+            background: #52a4ff;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .pricing-cards { grid-template-columns: 1fr; }
+            .pricing-card.premium { transform: none; }
+            .implementation-section, .contact-section { padding: 30px 20px; }
+        }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Never Miss a Lead Again</h1>
+            <p>Our 24/7 AI Receptionist qualifies leads, schedules viewings, and ensures your real estate agency is always open for business.</p>
+        </header>
+
+        <div class="implementation-section" style="margin-bottom: 60px;">
+            <h2 style="font-size: 2rem;">Core Features Included in All Plans</h2>
+            <ul class="features" style="columns: 2; gap: 40px; margin: 0 auto; max-width: 900px; border-bottom: none;">
+                <li><strong>24/7 Inbound Call Answering</strong></li>
+                <li><strong>Intelligent Lead Qualification</strong></li>
+                <li><strong>Automated Viewing Scheduling</strong></li>
+                <li><strong>Agent Calendar Sync</strong> (Google Calendar)</li>
+                <li><strong>Automated Viewing Reminders</strong></li>
+                <li><strong>Outbound Call Follow-ups</strong></li>
+                <li><strong>Client Control Panel</strong> (Airtable)</li>
+                <li><strong>Multi-Language Support</strong> (English & Hindi)</li>
+            </ul>
+        </div>
+        
+        <div class="pricing-cards">
+            <div class="pricing-card starter">
+                <div class="plan-name">🚀 ESSENTIAL</div>
+                <div class="pricing">
+                    <div class="setup-price">₹45k</div>
+                    <div class="monthly-price">₹12k/month</div>
+                </div>
+                <ul class="features">
+                    <li>All Core Features Included</li>
+                    <li>Up to <strong>500 conversations</strong>/month</li>
+                    <li>Up to <strong>20 Property Listings</strong></li>
+                    <li>Up to <strong>2 Agent Calendars</strong></li>
+                    <li>Standard Analytics Reports</li>
+                    <li>Email & Phone Support</li>
+                </ul>
+                <button class="cta-button" onclick="contact('essential')">Get Started</button>
+            </div>
+
+            <div class="pricing-card premium">
+                <div class="plan-name">⭐ PROFESSIONAL</div>
+                <div class="pricing">
+                    <div class="setup-price">₹60k</div>
+                    <div class="monthly-price">₹18k/month</div>
+                </div>
+                <ul class="features">
+                    <li>All Core Features Included</li>
+                    <li><strong>1,500 conversations</strong>/month</li>
+                    <li>Up to <strong>100 Property Listings</strong></li>
+                    <li>Up to <strong>10 Agent Calendars</strong></li>
+                    <li><strong>WhatsApp Business</strong> Integration</li>
+                    <li><strong>+2 Regional Languages</strong> (Bangla, Marathi)</li>
+                    <li>Dedicated Account Manager</li>
+                </ul>
+                <button class="cta-button pulse" onclick="contact('professional')">Choose Professional</button>
+            </div>
+
+            <div class="pricing-card enterprise">
+                <div class="plan-name">🏆 ELITE</div>
+                <div class="pricing">
+                    <div class="setup-price">Custom</div>
+                    <div class="monthly-price">Custom Quote</div>
+                </div>
+                <ul class="features">
+                    <li>All Professional Plan Features</li>
+                    <li><strong>Unlimited conversations</strong></li>
+                    <li><strong>Unlimited</strong> Listings & Calendars</li>
+                    <li><strong>Custom CRM Integration</strong> (e.g., Salesforce)</li>
+                    <li>Advanced Custom Analytics</li>
+                    <li>Quarterly Performance Reviews</li>
+                    <li>Dedicated Technical Support</li>
+                </ul>
+                <button class="cta-button" onclick="contact('elite')">Contact Us</button>
+            </div>
+        </div>
+
+        <div class="implementation-section">
+            <h2>🛠️ Our 2-Week Implementation Plan</h2>
+            <div class="timeline">
+                <div class="phase">
+                    <div class="phase-number">1</div>
+                    <h3>Setup & Configuration</h3>
+                    <div class="phase-payment">50% Payment</div>
+                    <p><strong>Week 1:</strong> We configure your Airtable dashboard, connect agent calendars, and set up the core AI assistant and phone number.</p>
+                </div>
+                <div class="phase">
+                    <div class="phase-number">2</div>
+                    <h3>Customization & Testing</h3>
+                    <div class="phase-payment">50% Payment</div>
+                    <p><strong>Week 2:</strong> We customize the AI's script with your qualification questions, you add your properties, and we test everything end-to-end.</p>
+                </div>
+                <div class="phase">
+                    <div class="phase-number">🚀</div>
+                    <h3>Go-Live & Training</h3>
+                    <div class="phase-payment">Launch</div>
+                    <p><strong>Start of Week 3:</strong> We activate the system on your main business line and provide a full training session for your team on using the dashboard.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Ready to Transform Your Agency?</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📧 Email</h4>
+                    <p>genuinestack@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 Phone (India)</h4>
+                    <p>+91 7753818253</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 Phone (US)</h4>
+                    <p>+1 (202) 505-9520</p>
+                </div>
+                 <div class="contact-item">
+                    <h4>📍 Address</h4>
+                    <p>Kolkata, West Bengal, India</p>
+                </div>
+            </div>
+            
+            <div class="payment-section">
+                <h3>We Accept All Major Payment Methods</h3>
+                <div class="payment-logos">
+                    <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/upi_logo_icon_169316.png" alt="UPI" title="UPI">
+                    <img src="https://cdn.icon-icons.com/icons2/2332/PNG/512/gpay_logo_icon_142318.png" alt="Google Pay" title="Google Pay">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-phonepe-1-698452.png" alt="PhonePe" title="PhonePe">
+                    <img src="https://cdn.icon-icons.com/icons2/729/PNG/512/paytm_icon-icons.com_62738.png" alt="Paytm" title="Paytm">
+                    <img src="https://www.svgrepo.com/show/362104/mastercard.svg" alt="Mastercard" title="Mastercard">
+                    <img src="https://www.svgrepo.com/show/448222/visa.svg" alt="Visa" title="Visa">
+                </div>
+                <p class="razorpay-link">
+                    <a href="https://razorpay.me/@genuinestack" target="_blank" rel="noopener noreferrer">Pay Securely via Razorpay</a>
+                </p>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <button class="cta-button" style="background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; max-width: 400px; margin: 0 auto; display: block;" onclick="contact('consultation')">
+                    📞 Schedule Your Free Consultation
+                </button>
+            </div>
+            
+            <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
+                This proposal is valid for 30 days. Custom solutions are available upon request.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function contact(plan) {
+            const phoneNumber = '917753818253';
+            const email = 'genuinestack@gmail.com'; // Corrected email
+            
+            let message = '';
+            // JAVASCRIPT UPDATED with new plan names and pricing
+            switch(plan) {
+                case 'essential':
+                    message = 'Hi! I\'m interested in the Essential Plan (₹45k setup + ₹12k/month) for the AI Receptionist. Please schedule a consultation.';
+                    break;
+                case 'professional':
+                    message = 'Hi! I\'m interested in the Professional Plan (₹60k setup + ₹18k/month) with WhatsApp integration. Let\'s discuss implementation.';
+                    break;
+                case 'elite':
+                    message = 'Hi! I\'m interested in the Elite Plan for my agency. Please contact me to discuss a custom quote.';
+                    break;
+                case 'consultation':
+                    message = 'Hi! I would like to schedule a free consultation to learn more about the GenuineStack AI Receptionist.';
+                    break;
+            }
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            if (confirm('Contact via WhatsApp? (Click Cancel to use Email)')) {
+                window.open(whatsappUrl, '_blank');
+            } else {
+                const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent('GenuineStack AI Receptionist Inquiry')}&body=${encodeURIComponent(message)}`;
+                window.location.href = mailtoUrl;
+            }
+        }
+    </script>
+</body>
+</html>
